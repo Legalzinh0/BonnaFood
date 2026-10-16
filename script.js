@@ -13,7 +13,7 @@ const PRODUCTS = [
     name: "Empadinha",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 0,
+    price: 10.90,
     emoji: "🥧",
     tag: "Salgado"
   },
@@ -22,7 +22,7 @@ const PRODUCTS = [
     name: "Copo da Felicidade",
     category: "doces",
     description: "Uma sobremesa especial para adoçar o dia.",
-    price: 0,
+    price: 17.90,
     emoji: "🍨",
     tag: "Doce"
   }
