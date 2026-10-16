@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3ed">
+  <meta name="description" content="Cardápio digital da Bonna Salgados. Escolha seus favoritos e peça pelo WhatsApp.">
+  <title>Bonna Salgados | Cardápio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Bonna Salgados - início">
+      <span class="brand-mark">B</span>
+      <span><strong>Bonna</strong><small>SALGADOS</small></span>
+    </a>
+    <button class="cart-shortcut" id="open-cart" aria-label="Abrir carrinho">
+      Carrinho <span id="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">FEITO COM CARINHO</p>
+      <h1>Seu momento<br><em>mais gostoso.</em></h1>
+      <p class="hero-copy">Confira nosso cardápio e escolha suas delícias favoritas.</p>
+      <a class="hero-link" href="#cardapio">Ver cardápio <span aria-hidden="true">↓</span></a>
+      <div class="hero-decoration" aria-hidden="true">B.</div>
+    </section>
+
+    <section class="menu-section" id="cardapio">
+      <div class="section-heading">
+        <div><p class="eyebrow">ESCOLHA O SEU</p><h2>Nosso cardápio</h2></div>
+        <p class="section-note">Adicione ao carrinho<br>e peça pelo WhatsApp.</p>
+      </div>
+      <div class="category-tabs" role="group" aria-label="Filtrar produtos">
+        <button class="category-tab active" data-category="todos">Todos</button>
+        <button class="category-tab" data-category="salgados">Salgados</button>
+        <button class="category-tab" data-category="doces">Doces</button>
+      </div>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      <p class="edit-hint">Os preços e produtos podem ser editados no arquivo <code>script.js</code>.</p>
+    </section>
+
+    <section class="order-banner">
+      <div><p class="eyebrow">FÁCIL E RÁPIDO</p><h2>Deu vontade?<br>Peça com a Bonna.</h2></div>
+      <button class="button button-light" id="banner-cart">Montar meu pedido <span>↗</span></button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#"><span class="brand-mark">B</span><span><strong>Bonna</strong><small>SALGADOS</small></span></a>
+    <p>Feito com carinho para deixar seu dia mais gostoso.</p>
+    <small>© <span id="year"></span> Bonna Salgados</small>
+  </footer>
+
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Seu carrinho" aria-modal="true" role="dialog" hidden>
+    <div class="cart-header"><div><p class="eyebrow">SEU PEDIDO</p><h2>Carrinho</h2></div><button class="close-cart" id="close-cart" aria-label="Fechar carrinho">×</button></div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-bottom">
+      <div class="total-row"><span>Total estimado</span><strong id="cart-total">R$ 0,00</strong></div>
+      <label class="field-label" for="customer-name">Seu nome (opcional)</label>
+      <input id="customer-name" class="customer-input" type="text" placeholder="Como podemos te chamar?">
+      <label class="field-label" for="order-notes">Observações (opcional)</label>
+      <textarea id="order-notes" class="customer-input" rows="2" placeholder="Ex.: retirar no balcão"></textarea>
+      <button class="button button-dark checkout-button" id="checkout">Finalizar pelo WhatsApp <span>↗</span></button>
+      <p class="checkout-note">O pedido será enviado para confirmação pelo WhatsApp.</p>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
