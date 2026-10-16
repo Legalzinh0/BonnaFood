@@ -5,7 +5,7 @@
  * 2) Edite nomes, descrições e preços na lista PRODUCTS abaixo.
  * 3) Preço deve ser número, sem "R$". Exemplo: price: 7.50
  */
-const WHATSAPP_NUMBER = "55DDNUMEROAQUI"; // Ex.: 5531999999999
+const WHATSAPP_NUMBER = "5531982875937"; // Ex.: 5531999999999
 
 const PRODUCTS = [
   {
