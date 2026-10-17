@@ -9,12 +9,81 @@ const WHATSAPP_NUMBER = "5531982875937"; // Ex.: 5531999999999
 
 const PRODUCTS = [
   {
+    id: "coxinha frango",
+    name: "Coxinha de Frango",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Coxinha-de-Frango.jpeg",
+    tag: "Salgado"
+  },
+   {
+    id: "quibe",
+    name: "Quibe",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Quibe.jpeg",
+    tag: "Salgado"
+  },
+   {
+    id: "enroladinho",
+    name: "Enroladinho de Salsicha",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Enroladinho-de-Salsicha.jpeg",
+    tag: "Salgado"
+  },
+   {
+    id: "pastel-de-carne",
+    name: "Pastel de Carne",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Pastel-de-Carne.jpeg",
+    tag: "Salgado"
+  },
+   {
+    id: "coxinha-premium",
+    name: "Coxinha Premium",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Coxinha-Premium.jpeg",
+    tag: "Salgado"
+  },
+   {
     id: "empadinha",
     name: "Empadinha",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
     price: 10.90,
-    emoji: "🥧",
+    image: "./img/Empadinha.jpeg",
+    tag: "Salgado"
+  }, {
+    id: "pastel-Assado",
+    name: "Pastel Assado",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Pastel-Assado.jpeg",
+    tag: "Salgado"
+  }, {
+    id: "tortinha",
+    name: "Tortinha",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Tortinha.jpeg",
+    tag: "Salgado"
+  }, {
+    id: "Esfirra-de-Frango",
+    name: "Esfirra de Frango",
+    category: "salgados",
+    description: "Uma opção saborosa para sua pausa.",
+    price: 10.90,
+    image: "./img/Esfirra-de-Frango.jpeg",
     tag: "Salgado"
   },
   {
@@ -23,9 +92,18 @@ const PRODUCTS = [
     category: "doces",
     description: "Uma sobremesa especial para adoçar o dia.",
     price: 17.90,
-    emoji: "🍨",
+    image: "./img/Copo-da-Felicidade.jpeg",
     tag: "Doce"
-  }
+  },
+  {
+    id: "queridinho",
+    name: "Queridinho",
+    category: "combos",
+    description: "Selecione 3 Salgados a sua escolha + uma Coca Lata 350ml.",
+    price: 44.97,
+    image: "./img/Queridinho.jpeg",
+    tag: "Combos"
+  },
   // Para adicionar outro produto, copie um objeto e altere id, nome,
   // categoria ("salgados" ou "doces"), descrição, preço, emoji e tag.
 ];
@@ -47,9 +125,11 @@ function renderProducts() {
   const shown = PRODUCTS.filter(p => activeCategory === "todos" || p.category === activeCategory);
   productGrid.innerHTML = shown.map(p => `
     <article class="product-card">
-      <div class="product-visual ${p.category}">
+      <div class="product-visual ${p.category}${p.image ? " has-image" : ""}">
         <span class="product-label">${escapeHtml(p.tag || p.category)}</span>
-        <span class="product-emoji" aria-hidden="true">${p.emoji || "🍴"}</span>
+        ${p.image
+          ? `<img class="product-image" src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.hidden=true">`
+          : `<span class="product-emoji" aria-hidden="true">${p.emoji || "🍴"}</span>`}
       </div>
       <div class="product-info">
         <h3>${escapeHtml(p.name)}</h3>

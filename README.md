@@ -36,3 +36,8 @@ Quando quiser alterar produtos ou preços, edite `script.js` no GitHub e clique 
 - O cardápio não processa pagamentos online; o pedido é enviado ao WhatsApp para confirmação.
 - O preço, disponibilidade, entrega/retirada e formas de pagamento devem ser combinados com a loja.
 - Se o endereço público não abrir, confirme em **Settings → Pages** se a publicação foi ativada e se o repositório está público.
+
+
+## Imagem do produto Queridinho
+
+Coloque o arquivo original `Queridinho.jpeg` dentro de uma pasta chamada `img`, no mesmo nível de `index.html`, `style.css` e `script.js`. O caminho esperado é `img/Queridinho.jpeg`.
