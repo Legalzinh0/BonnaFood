@@ -117,14 +117,20 @@ const overlay = document.getElementById("overlay");
 const cartItems = document.getElementById("cart-items");
 const cartCount = document.getElementById("cart-count");
 const cartTotal = document.getElementById("cart-total");
+const cartSubtotal = document.getElementById("cart-subtotal");
 const toast = document.getElementById("toast");
+const deliveryRadio = document.getElementById("order-delivery");
+const pickupRadio = document.getElementById("order-pickup");
+const addressFields = document.getElementById("address-fields");
+const customerAddress = document.getElementById("customer-address");
+const addressComplement = document.getElementById("address-complement");
 
 const money = value => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 function renderProducts() {
   const shown = PRODUCTS.filter(p => activeCategory === "todos" || p.category === activeCategory);
   productGrid.innerHTML = shown.map(p => `
-    <article class="product-card">
+    <article class="product-card reveal-card">
       <div class="product-visual ${p.category}${p.image ? " has-image" : ""}">
         <span class="product-label">${escapeHtml(p.tag || p.category)}</span>
         ${p.image
@@ -152,6 +158,11 @@ function addToCart(id) {
   if (!product) return;
   cart.set(id, (cart.get(id) || 0) + 1);
   renderCart();
+  const badge = cartCount;
+  badge.classList.remove("bump");
+  void badge.offsetWidth;
+  badge.classList.add("bump");
+  window.setTimeout(() => badge.classList.remove("bump"), 400);
   showToast(`${product.name} adicionado ao carrinho`);
 }
 
@@ -169,39 +180,76 @@ function renderCart() {
     const p = PRODUCTS.find(item => item.id === id);
     if (p) { count += qty; total += p.price * qty; }
   }
+
   cartCount.textContent = count;
   cartTotal.textContent = money(total);
+  cartSubtotal.textContent = money(total);
+
   if (cart.size === 0) {
-    cartItems.innerHTML = '<p class="empty-cart">Seu carrinho está vazio.<br>Escolha algo gostoso no cardápio!</p>';
+    cartItems.innerHTML = `
+      <div class="empty-cart">
+        <span class="empty-cart-mark" aria-hidden="true">B.</span>
+        <h3>Seu carrinho está esperando</h3>
+        <p>Escolha algo gostoso no cardápio e ele aparece aqui.</p>
+      </div>`;
     return;
   }
+
   cartItems.innerHTML = [...cart.entries()].map(([id, qty]) => {
     const p = PRODUCTS.find(item => item.id === id);
-    return `<div class="cart-item">
-      <div><h3>${escapeHtml(p.name)}</h3><small>${p.price > 0 ? money(p.price) + " cada" : "Preço a confirmar"}</small>
-        <div class="quantity">
-          <button data-change="${escapeHtml(id)}" data-delta="-1" aria-label="Diminuir quantidade">−</button>
-          <span>${qty}</span>
-          <button data-change="${escapeHtml(id)}" data-delta="1" aria-label="Aumentar quantidade">+</button>
+    const image = p.image
+      ? `<img class="cart-item-image" src="${escapeHtml(p.image)}" alt="" loading="lazy" onerror="this.hidden=true">`
+      : `<span class="cart-item-image cart-item-placeholder" aria-hidden="true">B.</span>`;
+    return `<article class="cart-item">
+      ${image}
+      <div class="cart-item-main">
+        <h3>${escapeHtml(p.name)}</h3>
+        <small>${p.price > 0 ? money(p.price) + " cada" : "Preço a confirmar"}</small>
+        <div class="quantity" aria-label="Quantidade de ${escapeHtml(p.name)}">
+          <button type="button" data-change="${escapeHtml(id)}" data-delta="-1" aria-label="Diminuir ${escapeHtml(p.name)}">−</button>
+          <span aria-live="polite">${qty}</span>
+          <button type="button" data-change="${escapeHtml(id)}" data-delta="1" aria-label="Aumentar ${escapeHtml(p.name)}">+</button>
         </div>
       </div>
-      <div class="cart-item-total">${p.price > 0 ? money(p.price * qty) : "A combinar"}</div>
-    </div>`;
+      <div class="cart-item-side">
+        <strong class="cart-item-total">${p.price > 0 ? money(p.price * qty) : "A combinar"}</strong>
+        <button type="button" class="remove-item" data-remove="${escapeHtml(id)}" aria-label="Remover ${escapeHtml(p.name)}">Remover</button>
+      </div>
+    </article>`;
   }).join("");
+
   cartItems.querySelectorAll("[data-change]").forEach(btn =>
     btn.addEventListener("click", () => changeQuantity(btn.dataset.change, Number(btn.dataset.delta)))
   );
+  cartItems.querySelectorAll("[data-remove]").forEach(btn =>
+    btn.addEventListener("click", () => {
+      cart.delete(btn.dataset.remove);
+      renderCart();
+      showToast("Item removido do carrinho");
+    })
+  );
 }
-
 function openCart() {
   cartDrawer.hidden = false;
   overlay.hidden = false;
+  requestAnimationFrame(() => {
+    cartDrawer.classList.add("is-open");
+    overlay.classList.add("is-visible");
+  });
   document.body.style.overflow = "hidden";
+  document.getElementById("close-cart").focus();
 }
 function closeCart() {
-  cartDrawer.hidden = true;
-  overlay.hidden = true;
+  cartDrawer.classList.remove("is-open");
+  overlay.classList.remove("is-visible");
   document.body.style.overflow = "";
+  window.setTimeout(() => {
+    if (!cartDrawer.classList.contains("is-open")) {
+      cartDrawer.hidden = true;
+      overlay.hidden = true;
+    }
+  }, 260);
+  document.getElementById("open-cart").focus({ preventScroll: true });
 }
 function showToast(message) {
   toast.textContent = message;
@@ -221,28 +269,84 @@ document.getElementById("close-cart").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
 document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
 
+function updateFulfilmentFields() {
+  const deliverySelected = deliveryRadio.checked;
+  addressFields.hidden = !deliverySelected;
+  customerAddress.required = deliverySelected;
+  document.querySelectorAll(".fulfilment-option").forEach(option => {
+    const input = option.querySelector('input[type="radio"]');
+    option.classList.toggle("selected", input.checked);
+  });
+  document.getElementById("delivery-summary").textContent =
+    deliverySelected ? "Taxa a confirmar" : pickupRadio.checked ? "Retirada na loja" : "Selecione entrega ou retirada";
+}
+
+deliveryRadio.addEventListener("change", updateFulfilmentFields);
+pickupRadio.addEventListener("change", updateFulfilmentFields);
+updateFulfilmentFields();
+
 document.getElementById("checkout").addEventListener("click", () => {
   if (cart.size === 0) { showToast("Adicione pelo menos um produto ao carrinho."); return; }
+  if (!deliveryRadio.checked && !pickupRadio.checked) {
+    showToast("Escolha entrega ou retirada para continuar.");
+    document.getElementById("fulfilment-title").scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  if (deliveryRadio.checked && !customerAddress.value.trim()) {
+    customerAddress.focus();
+    customerAddress.reportValidity();
+    showToast("Informe o endereço para entrega.");
+    return;
+  }
   if (!/^55\d{10,11}$/.test(WHATSAPP_NUMBER)) {
     showToast("Configure o número do WhatsApp no arquivo script.js.");
     return;
   }
+
   const name = document.getElementById("customer-name").value.trim();
   const notes = document.getElementById("order-notes").value.trim();
-  const lines = ["Olá, Bonna Salgados! Gostaria de fazer um pedido:", ""];
+  const fulfilment = deliveryRadio.checked ? "Entrega" : "Retirada na loja";
+  const lines = ["Olá, Bonna Salgados! Gostaria de fazer um pedido:", "", `Forma de recebimento: ${fulfilment}`];
+  if (deliveryRadio.checked) {
+    lines.push(`Endereço: ${customerAddress.value.trim()}`);
+    if (addressComplement.value.trim()) lines.push(`Complemento/referência: ${addressComplement.value.trim()}`);
+  }
+  lines.push("");
   let total = 0;
+  let hasUnpriced = false;
   for (const [id, qty] of cart) {
     const p = PRODUCTS.find(item => item.id === id);
     lines.push(`• ${qty}x ${p.name} — ${p.price > 0 ? money(p.price * qty) : "preço a confirmar"}`);
     total += p.price * qty;
+    if (!(p.price > 0)) hasUnpriced = true;
   }
-  lines.push("", `Total estimado: ${total > 0 ? money(total) : "a confirmar"}`);
+  lines.push("", `Subtotal dos itens: ${hasUnpriced ? "a confirmar" : money(total)}`);
+  lines.push(`Taxa de entrega: ${deliveryRadio.checked ? "a confirmar" : "não se aplica (retirada)"}`);
+  lines.push(`Total estimado: ${hasUnpriced ? "a confirmar" : money(total)}${deliveryRadio.checked ? " + eventual taxa de entrega" : ""}`);
   if (name) lines.push(`Nome: ${name}`);
   if (notes) lines.push(`Observações: ${notes}`);
-  lines.push("", "Pode confirmar a disponibilidade, por favor?");
+  lines.push("", "Pode confirmar a disponibilidade e o valor final, por favor?");
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener,noreferrer");
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
 renderProducts();
 renderCart();
+
+
+// Animações discretas de entrada: respeitam a preferência por movimento reduzido.
+if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-revealed");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll(".hero, .section-heading, .category-tabs, .product-card, .order-banner").forEach((element, index) => {
+    element.classList.add("reveal-on-scroll");
+    if (element.classList.contains("product-card")) element.style.setProperty("--reveal-delay", `${(index % 3) * 65}ms`);
+    revealObserver.observe(element);
+  });
+}

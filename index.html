@@ -12,9 +12,8 @@
   <header class="topbar">
     <a class="brand" href="#" aria-label="Bonna Salgados - início">
       <span class="brand-mark">
-        <div class="center">
-            <img src="./img/Logo.jpeg"> </img>
-        </div></span>
+        <img src="./img/Logo.jpeg" alt="Logo da Bonna Salgados">
+      </span>
       <span><strong>Bonna</strong><small>SALGADOS</small></span>
     </a>
     <button class="cart-shortcut" id="open-cart" aria-label="Abrir carrinho">
@@ -62,16 +61,45 @@
 
   <div class="overlay" id="overlay" hidden></div>
   <aside class="cart-drawer" id="cart-drawer" aria-label="Seu carrinho" aria-modal="true" role="dialog" hidden>
-    <div class="cart-header"><div><p class="eyebrow">SEU PEDIDO</p><h2>Carrinho</h2></div><button class="close-cart" id="close-cart" aria-label="Fechar carrinho">×</button></div>
+    <div class="cart-header">
+      <div><p class="eyebrow">SEU PEDIDO</p><h2>Seu carrinho</h2><p class="cart-subtitle">Confira os itens antes de enviar.</p></div>
+      <button class="close-cart" id="close-cart" aria-label="Fechar carrinho">×</button>
+    </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-bottom">
-      <div class="total-row"><span>Total estimado</span><strong id="cart-total">R$ 0,00</strong></div>
+      <section class="fulfilment-section" aria-labelledby="fulfilment-title">
+        <p class="field-label" id="fulfilment-title">Como você quer receber? <span class="required-mark">*</span></p>
+        <div class="fulfilment-options">
+          <label class="fulfilment-option" for="order-delivery">
+            <input id="order-delivery" type="radio" name="fulfilment" value="entrega" required>
+            <span class="fulfilment-icon" aria-hidden="true">↗</span>
+            <span><strong>Entrega</strong><small>Receba no endereço</small></span>
+          </label>
+          <label class="fulfilment-option" for="order-pickup">
+            <input id="order-pickup" type="radio" name="fulfilment" value="retirada" required>
+            <span class="fulfilment-icon" aria-hidden="true">⌂</span>
+            <span><strong>Retirada</strong><small>Busque na Bonna</small></span>
+          </label>
+        </div>
+        <div class="address-fields" id="address-fields" hidden>
+          <label class="field-label" for="customer-address">Endereço completo <span class="required-mark">*</span></label>
+          <input id="customer-address" class="customer-input" type="text" placeholder="Rua, número e bairro" autocomplete="street-address">
+          <label class="field-label" for="address-complement">Complemento ou referência (opcional)</label>
+          <input id="address-complement" class="customer-input" type="text" placeholder="Apartamento, portão, ponto de referência">
+        </div>
+      </section>
       <label class="field-label" for="customer-name">Seu nome (opcional)</label>
-      <input id="customer-name" class="customer-input" type="text" placeholder="Como podemos te chamar?">
+      <input id="customer-name" class="customer-input" type="text" placeholder="Como podemos te chamar?" autocomplete="name">
       <label class="field-label" for="order-notes">Observações (opcional)</label>
-      <textarea id="order-notes" class="customer-input" rows="2" placeholder="Ex.: retirar no balcão"></textarea>
-      <button class="button button-dark checkout-button" id="checkout">Finalizar pelo WhatsApp <span>↗</span></button>
-      <p class="checkout-note">O pedido será enviado para confirmação pelo WhatsApp.</p>
+      <textarea id="order-notes" class="customer-input" rows="2" placeholder="Algum detalhe para o pedido?"></textarea>
+      <div class="price-summary">
+        <div class="summary-line"><span>Itens do pedido</span><strong id="cart-subtotal">R$ 0,00</strong></div>
+        <div class="summary-line summary-muted"><span>Entrega</span><span id="delivery-summary">Confirmada pelo WhatsApp</span></div>
+        <div class="total-row"><span>Total estimado</span><strong id="cart-total">R$ 0,00</strong></div>
+        <p class="price-disclaimer">A taxa de entrega, se houver, será confirmada pela Bonna antes de concluir o pedido.</p>
+      </div>
+      <button class="button button-dark checkout-button" id="checkout">Enviar pedido pelo WhatsApp <span>↗</span></button>
+      <p class="checkout-note">Seu pedido será enviado para confirmação pelo WhatsApp.</p>
     </div>
   </aside>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

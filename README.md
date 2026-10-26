@@ -41,3 +41,13 @@ Quando quiser alterar produtos ou preços, edite `script.js` no GitHub e clique 
 ## Imagem do produto Queridinho
 
 Coloque o arquivo original `Queridinho.jpeg` dentro de uma pasta chamada `img`, no mesmo nível de `index.html`, `style.css` e `script.js`. O caminho esperado é `img/Queridinho.jpeg`.
+
+
+## Melhorias de experiência e carrinho
+
+- Animações suaves de entrada, hover e abertura do carrinho, respeitando a preferência do navegador por movimento reduzido.
+- Carrinho com miniaturas, controle de quantidade, remoção de itens e subtotal atualizado imediatamente.
+- A escolha entre **Entrega** e **Retirada** é obrigatória antes de enviar o pedido.
+- Em **Entrega**, o endereço completo é obrigatório. Complemento/referência é opcional.
+- O site não inventa a taxa de entrega: ela aparece como pendente e deve ser confirmada pela Bonna no WhatsApp. O total mostrado é o subtotal dos produtos, sem eventual taxa de entrega.
+- O pedido enviado ao WhatsApp inclui a modalidade escolhida, endereço quando aplicável, itens, quantidades e valores.
