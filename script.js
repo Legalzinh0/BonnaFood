@@ -13,7 +13,7 @@ const PRODUCTS = [
     name: "Coxinha de Frango",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 9.90,
     image: "./img/Coxinha-de-Frango.jpeg",
     tag: "Salgado"
   },
@@ -22,7 +22,7 @@ const PRODUCTS = [
     name: "Quibe",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 8.90,
     image: "./img/Quibe.jpeg",
     tag: "Salgado"
   },
@@ -31,7 +31,7 @@ const PRODUCTS = [
     name: "Enroladinho de Salsicha",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 8.90,
     image: "./img/Enroladinho-de-Salsicha.jpeg",
     tag: "Salgado"
   },
@@ -40,7 +40,7 @@ const PRODUCTS = [
     name: "Pastel de Carne",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 6.00,
     image: "./img/Pastel-de-Carne.jpeg",
     tag: "Salgado"
   },
@@ -49,7 +49,7 @@ const PRODUCTS = [
     name: "Coxinha Premium",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 9.90,
     image: "./img/Coxinha-Premium.jpeg",
     tag: "Salgado"
   },
@@ -58,7 +58,7 @@ const PRODUCTS = [
     name: "Empadinha",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 9.90,
     image: "./img/Empadinha.jpeg",
     tag: "Salgado"
   }, {
@@ -66,7 +66,7 @@ const PRODUCTS = [
     name: "Pastel Assado",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 9.90,
     image: "./img/Pastel-Assado.jpeg",
     tag: "Salgado"
   }, {
@@ -82,7 +82,7 @@ const PRODUCTS = [
     name: "Esfirra de Frango",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
-    price: 10.90,
+    price: 9.90,
     image: "./img/Esfirra-de-Frango.jpeg",
     tag: "Salgado"
   },
@@ -99,8 +99,8 @@ const PRODUCTS = [
     id: "queridinho",
     name: "Queridinho",
     category: "combos",
-    description: "Selecione 3 Salgados a sua escolha + uma Coca Lata 350ml.",
-    price: 44.97,
+    description: "Selecione 3 Salgados a sua escolha com 10% off",
+    price: 29.90,
     image: "./img/Queridinho.jpeg",
     tag: "Combos"
   },
