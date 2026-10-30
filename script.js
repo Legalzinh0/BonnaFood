@@ -78,7 +78,7 @@ const PRODUCTS = [
     image: "./img/Tortinha.jpeg",
     tag: "Salgado"
   }, {
-    id: "Esfirra-de-Frango",
+    id: "esfirra-de-Frango",
     name: "Esfirra de Frango",
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
