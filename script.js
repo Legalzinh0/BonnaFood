@@ -96,14 +96,88 @@ const PRODUCTS = [
     tag: "Doce"
   },
   {
+    id: "combo-assado",
+    name: "Combo Assado",
+    category: "combos",
+    description: "Contém: 1 Empada 1 Pastel Assado 1 Refrigerante Coca-Cola 350ml",
+    price: 26.90,
+    image: "./img/Combo-Assado.jpeg",
+    tag: "Combos"
+  },
+   {
     id: "queridinho",
     name: "Queridinho",
     category: "combos",
-    description: "Selecione 3 Salgados a sua escolha com 10% off",
-    price: 29.90,
+    description: "Selecione 3 Salgados a sua escolha com 1 Refrigerante Coca-Cola 350ml",
+    price: 37.90,
     image: "./img/Queridinho.jpeg",
     tag: "Combos"
   },
+   {
+    id: "pra-dois",
+    name: "Pra Dois",
+    category: "combos",
+    description: "Selecione 4 Salgados a sua escolha com 2 Refrigerante Coca-Cola 350ml",
+    price: 56.70,
+    image: "./img/Pra-Dois.jpeg",
+    tag: "Combos"
+  },
+  {
+    id: "coca-cola-2L",
+    name: "Coca-Cola 2L",
+    category: "refrigerantes",
+    description: "Uma bebida refrescante para acompanhar seus lanches.",
+    price: 18.00,
+    image: "./img/Coca-Cola-2L.jpeg",
+    tag: "Refrigerantes"
+  },
+  {
+    id: "guarana-2L",
+    name: "Guaraná 2L",
+    category: "refrigerantes",
+    description: "Uma bebida refrescante para acompanhar seus lanches.",
+    price: 18.00,
+    image: "./img/Guarana-2L.jpeg",
+    tag: "Refrigerantes"
+  },
+  {
+    id: "coca-cola-350ml",
+    name: "Coca-Cola 350ml",
+    category: "refrigerantes",
+    description: "Uma bebida refrescante para acompanhar seus lanches.",
+    price: 7.00,
+    image: "./img/Coca-Cola-350ml.jpeg",
+    tag: "Refrigerantes"
+  },
+  {
+    id: "guarana-350ml",
+    name: "Guaraná 350ml",
+    category: "refrigerantes",
+    description: "Uma bebida refrescante para acompanhar seus lanches.",
+    price: 7.00,
+    image: "./img/Guarana-350ml.jpeg",
+    tag: "Refrigerantes"
+  },
+  {
+    id: "coca-cola-200ml",
+    name: "Coca-Cola 200ml",
+    category: "refrigerantes",
+    description: "Uma bebida refrescante para acompanhar seus lanches.",
+    price: 3.50,
+    image: "./img/Coca-Cola-200ml.jpeg",
+    tag: "Refrigerantes"
+  },
+  {
+    id: "guarana-200ml",
+    name: "Guaraná 200ml",
+    category: "refrigerantes",
+    description: "Uma bebida refrescante para acompanhar seus lanches.",
+    price: 3.50,
+    image: "./img/Guarana-200ml.jpeg",
+    tag: "Refrigerantes"
+  },
+  
+
   // Para adicionar outro produto, copie um objeto e altere id, nome,
   // categoria ("salgados" ou "doces"), descrição, preço, emoji e tag.
 ];
