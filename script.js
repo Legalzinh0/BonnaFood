@@ -32,7 +32,7 @@ const PRODUCTS = [
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
     price: 8.90,
-    image: "./img/Enroladinho-de-Salsicha.jpeg",
+    image: "./img/Enroladinho-de-salsicha.jpeg",
     tag: "Salgado"
   },
    {
@@ -83,7 +83,7 @@ const PRODUCTS = [
     category: "salgados",
     description: "Uma opção saborosa para sua pausa.",
     price: 9.90,
-    image: "./img/Esfirra-de-Frango.jpeg",
+    image: "./img/Esfirra-de-frango.jpeg",
     tag: "Salgado"
   },
   {
